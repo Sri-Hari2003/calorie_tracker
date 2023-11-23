@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Tracker - Log Food</title>
+</head>
+<body>
+    <h1>Hello, {{ user_info.username }}!</h1>
+    <p>Your maintenance calories: {{ user_info.maintenance_calories }}</p>
+    
+    <h2>Log your daily food intake</h2>
+    <form action="/log_food/{{ user_info.user_id }}" method="post">
+        <label for="food_name">Food Name:</label>
+        <input type="text" id="food_name" name="food_name" required>
+        <br>
+        <input type="submit" value="Log Food">
+    </form>
+
+    <h2>Your Daily Calories Entries</h2>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Calories Consumed</th>
+            <th>Calories Over Maintenance</th>
+        </tr>
+        {% for entry in daily_calories_entries %}
+        <tr>
+            <td>{{ entry.date }}</td>
+            <td>{{ entry.calories_consumed }}</td>
+            <td>{{ entry.calories_over_maintenance }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Total Macros and Calories Consumed</h2>
+    <p>Total Protein: {{ total_protein }}</p>
+    <p>Total Carbs: {{ total_carbs }}</p>
+    <p>Total Fat: {{ total_fat }}</p>
+    <p>Total Calories Consumed: {{ total_calories_consumed }}</p>
+</body>
+</html>
